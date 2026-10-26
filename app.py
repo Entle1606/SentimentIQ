@@ -1,11 +1,23 @@
 from pathlib import Path
 import csv, io, json
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sentiment_tool import analyse, aspect_stats, priority
 
 app = FastAPI(title='SentimentIQ API', version='1.0.0')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://entle1606.github.io",
+        "http://localhost:8001",
+        "http://127.0.0.1:8001"
+    ],
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"]
+)
 ROOT = Path(__file__).parent
 class Payload(BaseModel):
     texts: list[str]
