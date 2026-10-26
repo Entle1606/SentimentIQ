@@ -50,7 +50,29 @@ NEG = {"bad": -2, "terrible": -3, "awful": -3, "horrible": -3, "worst": -3, "hat
        "keeps": -0.3, "pain": -2.5, "painful": -2.5, "suffer": -2.5,
        "damaged": -2.5, "damage": -2, "pricey": -1, "skeptical": -1.2, "sceptical": -1.2,
        "suspicious": -1.5}
-LEXICON = {**POS, **NEG}
+# Domain-specific vocabulary for software and app-performance feedback.
+# Keep this separate from the general lexicon so changes are auditable.
+APP_POS = {
+    "snappy": 2, "seamless": 2, "fluid": 1.5, "responsive": 2,
+    "responsiveness": 2, "stable": 1.7, "stability": 1.2,
+    "optimized": 1.7, "optimised": 1.7, "efficient": 1.5,
+    "effortless": 1.8, "instant": 1.5, "instantaneous": 2,
+    "smoothly": 1.8, "flawless": 2.5, "speedy": 1.5,
+}
+APP_NEG = {
+    "stutter": -2, "stutters": -2, "stuttering": -2.5,
+    "lag": -2, "lags": -2, "lagging": -2.3, "laggy": -2.3,
+    "latency": -1.8, "timeout": -2.5, "timeouts": -2.5,
+    "unresponsive": -2.5, "freeze": -2.5, "freezes": -2.5,
+    "freezing": -2.5, "frozen": -2.5, "glitch": -2,
+    "glitches": -2, "glitchy": -2, "sluggish": -2,
+    "sluggishness": -2, "choppy": -2, "janky": -2,
+    "overheating": -2.5, "overheats": -2.5, "drain": -1.8,
+    "draining": -2, "unusable": -3, "unstable": -2.3,
+    "bottleneck": -1.8, "bottlenecks": -1.8, "hangs": -2,
+}
+
+LEXICON = {**POS, **NEG, **APP_POS, **APP_NEG}
 NEGATORS = {"not", "no", "never", "isnt", "wasnt", "dont", "didnt", "cant", "wont",
             "doesnt", "hardly", "without", "havent", "hasnt", "hadnt", "wouldnt",
             "couldnt", "shouldnt", "arent", "werent"}
